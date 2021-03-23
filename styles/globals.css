@@ -14,3 +14,9 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.container {
+  height: 100vh;
+  background: aqua;
+  width: 100%;
+}
