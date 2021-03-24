@@ -1,59 +1,49 @@
 import { useEffect, useState } from "react";
 import style from "../../styles/Home.module.css";
-import {
-  motion,
-  useAnimation,
-  useMotionValue,
-  useTransform,
-} from "framer-motion";
+import { motion, useAnimation } from "framer-motion";
 import { useSwipeable } from "react-swipeable";
 
 const Swipeable = (props) => {
+  // captured the Y scroll distance
   const [absY, setAbsY] = useState(0);
-  const [isSwipped, setIsSwipped] = useState(false);
-  //const scrollY = useMotionValue(0);
-  //const scaleValue = useTransform(scrollY, [0, window.innerHeight], [0.8, 1]);
+  // Framer motion animation controller
   const controller = useAnimation();
 
+  // animation settings / animation variants
   const variant = {
     top: {
       y: "-100vh",
       transition: {
         ease: "linear",
-        duration: 0.3,
+        duration: 0.4,
       },
     },
     bottom: {
       y: "0",
       transition: {
         ease: "linear",
-        duration: 0.3,
+        duration: 0.4,
       },
     },
   };
 
   const handlers = useSwipeable({
+    //  listen for events , on per CARD level.
     onSwiping: (e) => {
-      console.log("c", e.deltaY);
+      // listen for drag / continous swipe
       if (e.deltaY < 0 && props.i != 0) setAbsY(e.deltaY);
     },
     onSwipedUp: (e) => {
       if (props.i != 0) {
-        console.log("swipeUp", e);
+        // listen for swipe up
         props.onSwipe(props.i);
         controller.start(variant.top);
       }
     },
-    onSwipedDown: (e) => {
-      console.log("swipeDown", e);
-    },
-    preventDefaultTouchmoveEvent: true,
-    trackMouse: true,
   });
   useEffect(() => {
-    console.log(props.onDownSwipe);
+    // swipe down only if there are swiped up cards
     if (props.lastSwiped === props.i) {
-      console.log("useEffect abs");
       controller.start(variant.bottom);
       props.onSwipe(props.i + 1);
     }

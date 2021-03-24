@@ -1,23 +1,25 @@
-import { useState, useEffect } from "react";
-import styles from "../styles/Home.module.css";
-import { motion } from "framer-motion";
+import { useState } from "react";
 import Swipeable from "../components/swipeable/swipeable";
 import { useSwipeable } from "react-swipeable";
 
+//import static json data
 import { data } from "../pages/api/data";
 
 export default function Home() {
+  // save states on down swipe
   const [onDownSwipe, setOnDownSwipe] = useState(1);
+  // save the previous card[index] swiped off the screen
   const [lastSwipedCard, setLastSwipedCard] = useState(-1);
 
   const onSwipe = (i) => {
-    console.log("SWIPE FROM CHILD", i);
+    //set the index of the last card swiped
     setLastSwipedCard(i);
   };
 
+  // swipe detection handlers
   const handlers = useSwipeable({
     onSwipedDown: (e) => {
-      console.log("parentswipeDown", e);
+      // listen for swipe down and register it
       setOnDownSwipe(onDownSwipe + 1);
     },
     preventDefaultTouchmoveEvent: true,
