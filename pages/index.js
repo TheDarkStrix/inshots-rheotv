@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styles from "../styles/Home.module.css";
 import { motion } from "framer-motion";
 import Swipeable from "../components/swipeable/swipeable";
@@ -8,6 +8,26 @@ export default function Home() {
   const [onDownSwipe, setOnDownSwipe] = useState(1);
   const [onUpSwipe, setOnUpSwipe] = useState(1);
   const [lastSwipedCard, setLastSwipedCard] = useState(-1);
+  const [articles, setArticles] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  const getNewsPost = () => {
+    fetch(
+      "https://newsapi.org/v2/top-headlines?country=in&apiKey=cdba3169c96b449f94dcde25a097fe44"
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data.articles);
+        if (data.articles) {
+          setArticles(data.articles);
+          setLoading(false);
+        }
+      });
+  };
+
+  useEffect(() => {
+    getNewsPost();
+  }, []);
 
   let array = [
     {
@@ -46,16 +66,22 @@ export default function Home() {
       }}
       {...handlers}
     >
-      {array.reverse().map((data, i) => (
-        <Swipeable
-          data={data}
-          key={i}
-          i={i}
-          lastSwiped={lastSwipedCard}
-          onSwipe={onSwipe}
-          onDownSwipe={onDownSwipe}
-        />
-      ))}
+      {!loading ? (
+        <>
+          {articles.reverse().map((data, i) => (
+            <Swipeable
+              data={data}
+              key={i}
+              i={i}
+              lastSwiped={lastSwipedCard}
+              onSwipe={onSwipe}
+              onDownSwipe={onDownSwipe}
+            />
+          ))}
+        </>
+      ) : (
+        "Loading, getting upto date news ....."
+      )}
     </div>
   );
 }
