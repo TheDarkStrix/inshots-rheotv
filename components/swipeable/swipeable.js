@@ -79,17 +79,17 @@ const Swipeable = (props) => {
       >
         <div className={style.newsWrapper}>
           <div className={style.image}>
-            <img src={props.data.urlToImage} />
+            <img src={props.data.image} />
           </div>
           <div className={style.contentWrapper}>
             <div className={style.fixedContent}>
               <div className={style.title}>{props.data.title}</div>
-              <div className={style.content}>{props.data.content}</div>
-              <div className={style.author}>{props.data.author}</div>
+              <div className={style.content}>{props.data.description}</div>
+              <div className={style.author}>{props.data.source.name}</div>
             </div>
             <div className={style.footer}>
               <div className={style.blured}>
-                <img src={props.data.urlToImage} />
+                <img src={props.data.image} />
               </div>
               <div className={style.semiTitle}>
                 <a target="_blank" href={props.data.url}>

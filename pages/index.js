@@ -13,7 +13,7 @@ export default function Home() {
 
   const getNewsPost = () => {
     fetch(
-      "https://newsapi.org/v2/top-headlines?country=in&apiKey=cdba3169c96b449f94dcde25a097fe44"
+      "https://gnews.io/api/v4/top-headlines?token=82caa6e4db46a6f3ad9eb511f544cfa8&lang=en"
     )
       .then((response) => response.json())
       .then((data) => {
