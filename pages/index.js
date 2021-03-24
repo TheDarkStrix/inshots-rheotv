@@ -10,10 +10,17 @@ export default function Home() {
   const [lastSwipedCard, setLastSwipedCard] = useState(-1);
 
   let array = [
-    { color: "red", title: "title 1" },
-    { color: "blue", title: "title 2" },
-    { color: "black", title: "title 3" },
-    { color: "purple", title: "title 4" },
+    {
+      color: "black",
+      title: "Top 12 things to know before the market opens - Moneycontrol.com",
+      author: "Staff Writer",
+      url:
+        "https://www.livemint.com/news/india/covid-vaccine-age-limit-eased-mha-issues-new-guidelines-amid-surge-in-cases-top-developments-11616547567569.html",
+      content:
+        "In a big boost to India's inoculation drive amid a surge in new Covid-19 cases, the Central Government has eased the age limit on vaccination, allowing all those above 45 years in age to get the dose… [+6806 chars]",
+      urlToImage:
+        "https://images.moneycontrol.com/static-mcnews/2020/01/BSE_Sensex_Stocks_market-770x433.png",
+    },
   ];
 
   const onSwipe = (i) => {

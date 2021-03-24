@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import style from "../../styles/Home.module.css";
 import {
   motion,
   useAnimation,
@@ -69,13 +70,36 @@ const Swipeable = (props) => {
         style={{
           y: absY || 0,
           height: "100vh",
-          background: props.data.color,
+          background: "white",
           position: "absolute",
           width: "100%",
           left: 0,
           top: 0,
         }}
-      ></motion.div>
+      >
+        <div className={style.newsWrapper}>
+          <div className={style.image}>
+            <img src={props.data.urlToImage} />
+          </div>
+          <div className={style.contentWrapper}>
+            <div className={style.fixedContent}>
+              <div className={style.title}>{props.data.title}</div>
+              <div className={style.content}>{props.data.content}</div>
+              <div className={style.author}>{props.data.author}</div>
+            </div>
+            <div className={style.footer}>
+              <div className={style.blured}>
+                <img src={props.data.urlToImage} />
+              </div>
+              <div className={style.semiTitle}>
+                <a target="_blank" href={props.data.url}>
+                  {props.data.title}
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </motion.div>
     </>
   );
 };
