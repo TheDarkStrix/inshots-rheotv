@@ -20,18 +20,15 @@ const Swipeable = (props) => {
       y: "-100vh",
       transition: {
         ease: "linear",
-        duration: 0.6,
+        duration: 0.3,
       },
     },
     bottom: {
       y: "0",
       transition: {
         ease: "linear",
-        duration: 0.6,
+        duration: 0.3,
       },
-    },
-    behind: {
-      scale: 0.8,
     },
   };
 
